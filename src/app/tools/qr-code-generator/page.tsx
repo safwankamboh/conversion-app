@@ -5,13 +5,7 @@ import Header from "@/components/Header";
 import { QrCode, Download, Copy, Settings } from "lucide-react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-
-interface QRCodeOptions {
-  size: number;
-  foreground: string;
-  background: string;
-  errorCorrection: "L" | "M" | "Q" | "H";
-}
+import { QRCodeOptions } from "@/types/qrcode";
 
 export default function QRCodeGenerator() {
   const [text, setText] = useState("https://convertall.com");

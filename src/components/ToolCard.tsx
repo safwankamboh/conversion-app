@@ -75,7 +75,7 @@ export default function ToolCard({ tool, className }: ToolCardProps) {
 
   return (
     <Link href={tool.route}>
-      <div className={cn("tool-card group cursor-pointer", className)}>
+      <div className={cn("tool-card group cursor-pointer", className, "h-38")}>
         <div className="flex items-start space-x-4">
           <div className="flex-shrink-0">
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">

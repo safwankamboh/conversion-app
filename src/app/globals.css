@@ -74,7 +74,7 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-0 box-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -91,7 +91,8 @@ body {
   }
   
   .tool-card {
-    @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-700 card-hover;
+    /* @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-700 card-hover; */
+    @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-700 ;
   }
   
   .btn-primary {
