@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { QrCode, Download, Copy, Settings } from "lucide-react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import FormSelect from "@/components/form-select";
 import { QRCodeOptions } from "@/types/qrcode";
 
 export default function QRCodeGenerator() {
@@ -239,20 +240,19 @@ export default function QRCodeGenerator() {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Size
-                </label>
-                <select
+                <FormSelect
+                  label="Size"
                   value={options.size}
                   onChange={(e) =>
                     setOptions({ ...options, size: parseInt(e.target.value) })
                   }
-                  className="input-field"
-                >
-                  <option value={128}>128px</option>
-                  <option value={256}>256px</option>
-                  <option value={512}>512px</option>
-                </select>
+                  leftIcon={Settings}
+                  options={[
+                    { value: "128", label: "128px" },
+                    { value: "256", label: "256px" },
+                    { value: "512", label: "512px" }
+                  ]}
+                />
               </div>
 
               <div>
@@ -284,10 +284,8 @@ export default function QRCodeGenerator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Error Correction
-                </label>
-                <select
+                <FormSelect
+                  label="Error Correction"
                   value={options.errorCorrection}
                   onChange={(e) =>
                     setOptions({
@@ -295,13 +293,14 @@ export default function QRCodeGenerator() {
                       errorCorrection: e.target.value as any,
                     })
                   }
-                  className="input-field"
-                >
-                  <option value="L">Low (7%)</option>
-                  <option value="M">Medium (15%)</option>
-                  <option value="Q">Quartile (25%)</option>
-                  <option value="H">High (30%)</option>
-                </select>
+                  leftIcon={Settings}
+                  options={[
+                    { value: "L", label: "Low (7%)" },
+                    { value: "M", label: "Medium (15%)" },
+                    { value: "Q", label: "Quartile (25%)" },
+                    { value: "H", label: "High (30%)" }
+                  ]}
+                />
               </div>
             </div>
           </div>

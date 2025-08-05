@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories } from "@/lib/conversion-tools";
+import FormInput from "@/components/form-input";
 
 const iconMap = {
   FileText,
@@ -118,14 +119,14 @@ export default function Header() {
         {/* Search Bar */}
         {isSearchOpen && (
           <div className="py-4 animate-slide-in">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search for tools..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-              />
-            </div>
+            <FormInput
+              type="text"
+              placeholder="Search for tools..."
+              leftIcon={Search}
+              size="md"
+              fullWidth
+              variant="default"
+            />
           </div>
         )}
 

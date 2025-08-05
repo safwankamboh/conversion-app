@@ -6,6 +6,8 @@ import { DollarSign, ArrowLeftRight, TrendingUp, Clock } from "lucide-react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { currencies } from "@/common-imports/currencies";
+import FormInput from "@/components/form-input";
+import FormSelect from "@/components/form-select";
 
 export default function CurrencyConverter() {
   const [fromValue, setFromValue] = useState("1");
@@ -108,34 +110,28 @@ export default function CurrencyConverter() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
               {/* From */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Amount
-                </label>
-                <input
+                <FormInput
+                  label="Amount"
                   type="number"
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
-                  className="input-field"
                   placeholder="Enter amount"
+                  leftIcon={DollarSign}
                 />
               </div>
 
               {/* Currency Selector */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  From Currency
-                </label>
-                <select
+                <FormSelect
+                  label="From Currency"
                   value={fromCurrency}
                   onChange={(e) => setFromCurrency(e.target.value)}
-                  className="input-field"
-                >
-                  {currencies.map((currency) => (
-                    <option key={currency.code} value={currency.code}>
-                      {currency.code} - {currency.name}
-                    </option>
-                  ))}
-                </select>
+                  leftIcon={DollarSign}
+                  options={currencies.map((currency) => ({
+                    value: currency.code,
+                    label: `${currency.code} - ${currency.name}`
+                  }))}
+                />
               </div>
 
               {/* Swap Button */}
@@ -153,20 +149,16 @@ export default function CurrencyConverter() {
             {/* To */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  To Currency
-                </label>
-                <select
+                <FormSelect
+                  label="To Currency"
                   value={toCurrency}
                   onChange={(e) => setToCurrency(e.target.value)}
-                  className="input-field"
-                >
-                  {currencies.map((currency) => (
-                    <option key={currency.code} value={currency.code}>
-                      {currency.code} - {currency.name}
-                    </option>
-                  ))}
-                </select>
+                  leftIcon={DollarSign}
+                  options={currencies.map((currency) => ({
+                    value: currency.code,
+                    label: `${currency.code} - ${currency.name}`
+                  }))}
+                />
               </div>
 
               <div>

@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import { Ruler, ArrowLeftRight } from "lucide-react";
 import Link from "next/link";
 import { lengthUnits } from "@/common-imports/length-units";
+import FormInput from "@/components/form-input";
+import FormSelect from "@/components/form-select";
 
 export default function LengthConverter() {
   const [fromValue, setFromValue] = useState("1");
@@ -84,34 +86,30 @@ export default function LengthConverter() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
               {/* From */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  From
-                </label>
-                <input
+                <FormInput
+                  label="From"
                   type="number"
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
-                  className="input-field"
                   placeholder="Enter value"
+                  leftIcon={Ruler}
+                  variant="outlined"
                 />
               </div>
 
               {/* Unit Selector */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Unit
-                </label>
-                <select
+                <FormSelect
+                  label="Unit"
                   value={fromUnit}
                   onChange={(e) => setFromUnit(e.target.value)}
-                  className="input-field"
-                >
-                  {lengthUnits.map((unit) => (
-                    <option key={unit.symbol} value={unit.symbol}>
-                      {unit.name} ({unit.symbol})
-                    </option>
-                  ))}
-                </select>
+                  leftIcon={Ruler}
+                  options={lengthUnits.map((unit) => ({
+                    value: unit.symbol,
+                    label: `${unit.name} (${unit.symbol})`,
+                  }))}
+                  variant="outlined"
+                />
               </div>
 
               {/* Swap Button */}
@@ -129,20 +127,17 @@ export default function LengthConverter() {
             {/* To */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  To Unit
-                </label>
-                <select
+                <FormSelect
+                  label="To Unit"
                   value={toUnit}
                   onChange={(e) => setToUnit(e.target.value)}
-                  className="input-field"
-                >
-                  {lengthUnits.map((unit) => (
-                    <option key={unit.symbol} value={unit.symbol}>
-                      {unit.name} ({unit.symbol})
-                    </option>
-                  ))}
-                </select>
+                  leftIcon={Ruler}
+                  options={lengthUnits.map((unit) => ({
+                    value: unit.symbol,
+                    label: `${unit.name} (${unit.symbol})`,
+                  }))}
+                  variant="outlined"
+                />
               </div>
 
               <div>
