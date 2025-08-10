@@ -84,19 +84,7 @@ export default function LengthConverter() {
         <div className="max-w-2xl mx-auto">
           <div className="tool-card">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-              {/* From */}
-              <div>
-                <FormInput
-                  label="From"
-                  type="number"
-                  value={fromValue}
-                  onChange={(e) => setFromValue(e.target.value)}
-                  placeholder="Enter value"
-                  leftIcon={Ruler}
-                  variant="outlined"
-                />
-              </div>
-
+              
               {/* Unit Selector */}
               <div>
                 <FormSelect
@@ -122,10 +110,7 @@ export default function LengthConverter() {
                   <ArrowLeftRight className="h-5 w-5" />
                 </button>
               </div>
-            </div>
 
-            {/* To */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
               <div>
                 <FormSelect
                   label="To Unit"
@@ -139,14 +124,37 @@ export default function LengthConverter() {
                   variant="outlined"
                 />
               </div>
+            </div>
+
+            {/* To */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+              {/* From */}
+              <div>
+                <FormInput
+                  label="From"
+                  type="number"
+                  value={fromValue}
+                  onChange={(e) => setFromValue(e.target.value)}
+                  placeholder="Enter value"
+                  leftIcon={Ruler}
+                  variant="outlined"
+                />
+              </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Result
-                </label>
-                <div className="input-field bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white">
+                <FormInput
+                  label="Result"
+                  // type="number"
+                  value={result || "0"}
+                  onChange={(e) => setFromValue(e.target.value)}
+                  placeholder="Enter value"
+                  leftIcon={Ruler}
+                  variant="outlined"
+                  readOnly
+                />
+                {/* <div className="input-field bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white">
                   {result || "0"}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

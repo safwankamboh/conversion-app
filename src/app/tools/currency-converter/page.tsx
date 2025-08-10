@@ -31,6 +31,7 @@ export default function CurrencyConverter() {
       // Using a free currency API
       const response = await fetch(
         `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`
+        // `https://v6.exchangerate-api.com/v6/17cc0dd8a736351d2441acc0/latest/${fromCurrency}`
       );
       const data = await response.json();
 

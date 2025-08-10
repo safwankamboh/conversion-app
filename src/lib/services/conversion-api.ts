@@ -122,3 +122,55 @@ export const getConversionLimits = async (): Promise<any> => {
     throw new Error(error.response?.data?.message || 'Failed to get conversion limits');
   }
 };
+
+// Single PDF to Word conversion
+export const convertPdfToWord = async (
+  file: File
+): Promise<ConversionResponse> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await api.post('/convert/pdf-to-word', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      timeout: 60000, // 1 minute for single file
+    });
+
+    return response.data;
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.response?.data?.message || 'Conversion failed',
+    };
+  }
+};
+
+// Batch PDF to Word conversion
+export const convertBatchPdfToWord = async (
+  files: File[]
+): Promise<BatchConversionResponse> => {
+  try {
+    const formData = new FormData();
+    files.forEach((file, index) => {
+      formData.append(`files[${index}]`, file);
+    });
+
+    const response = await api.post('/convert/batch/pdf-to-word', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      timeout: 120000, // 2 minutes for batch conversion
+    });
+
+    return response.data;
+  } catch (error: any) {
+    return {
+      success: false,
+      files: [],
+      error: error.response?.data?.message || 'Batch conversion failed',
+    };
+  }
+};
+
