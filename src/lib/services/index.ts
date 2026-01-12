@@ -1,7 +1,6 @@
 // Export all API services
-export * from './conversion-api';
-export * from './currency-api';
-export * from './utils-api';
+export * from "./conversion-api";
+export * from "./currency-api";
 
 // Re-export the main API instance
-export { default as api } from '../api';
+export { default as api } from "../api";

@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance with default configuration
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://api.convertall.com",
+  baseURL: process.env.BASE_URL,
   timeout: 30000, // 30 seconds
   headers: {
     "Content-Type": "application/json",
