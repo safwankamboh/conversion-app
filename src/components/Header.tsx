@@ -14,6 +14,7 @@ import {
   Code,
   Image,
   Terminal,
+  LogIn,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories } from "@/lib/conversion-tools";
@@ -90,17 +91,51 @@ export default function Header() {
               <Search className="h-5 w-5" />
             </button>
 
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-            >
-              {isDark ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
+            {/* Theme Dropdown */}
+            <div className="relative group">
+              <button
+                className="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1"
+              >
+                {isDark ? (
+                  <Moon className="h-5 w-5" />
+                ) : (
+                  <Sun className="h-5 w-5" />
+                )}
+              </button>
+
+              <div className="absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
+                <button
+                  onClick={() => !isDark && toggleTheme()}
+                  className={`w-full text-left px-4 py-2 text-sm flex items-center space-x-2 hover:bg-gray-50 dark:hover:bg-gray-700 ${!isDark ? 'text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-700 dark:text-gray-200'}`}
+                >
+                  <Sun className="h-4 w-4" />
+                  <span>Light</span>
+                </button>
+                <button
+                  onClick={() => isDark && toggleTheme()}
+                  className={`w-full text-left px-4 py-2 text-sm flex items-center space-x-2 hover:bg-gray-50 dark:hover:bg-gray-700 ${isDark ? 'text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-700 dark:text-gray-200'}`}
+                >
+                  <Moon className="h-4 w-4" />
+                  <span>Dark</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Auth Buttons - Desktop */}
+            <div className="hidden md:flex items-center space-x-4">
+              <Link
+                href="/login"
+                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white font-medium transition-colors"
+              >
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-2 rounded-lg hover:opacity-90 transition-opacity font-medium shadow-md shadow-blue-500/20"
+              >
+                Sign up
+              </Link>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -155,13 +190,23 @@ export default function Header() {
               >
                 Finance Tools
               </Link>
-              <Link
-                href="/tools"
-                className="block text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                All Tools
-              </Link>
+
+              <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex flex-col space-y-3">
+                <Link
+                  href="/login"
+                  className="w-full text-center py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white font-medium transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/signup"
+                  className="w-full flex justify-center items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span>Sign up</span>
+                </Link>
+              </div>
             </nav>
           </div>
         )}

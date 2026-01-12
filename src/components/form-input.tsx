@@ -23,7 +23,9 @@ export interface FormInputProps
   helperTextClassName?: string;
   onLeftIconClick?: () => void;
   onRightIconClick?: () => void;
-  children?: ReactNode;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // children?: ReactNode;
   type?: string; // Allow type to be specified, e.g., "text", "email", "password"
 }
 
@@ -47,6 +49,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       helperTextClassName,
       onLeftIconClick,
       onRightIconClick,
+      value,
+      onChange,
       children,
       id,
       type = "text",
@@ -129,6 +133,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           <input
             ref={ref}
             id={inputId}
+            value={value}
+            onChange={onChange}
             type={type}
             className={cn(
               baseInputClasses,
@@ -142,8 +148,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
               error
                 ? `${inputId}-error`
                 : helperText
-                ? `${inputId}-helper`
-                : undefined
+                  ? `${inputId}-helper`
+                  : undefined
             }
             // {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
             {...(type === "number" ? { inputMode: "numeric", pattern: "[0-9]*" } : {})}
