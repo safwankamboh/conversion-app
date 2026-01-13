@@ -4,6 +4,8 @@ import Link from "next/link";
 import { User, Facebook, Mail, Lock } from "lucide-react";
 import FormInput from "@/components/form-input";
 import { useState } from "react";
+import { signup } from "@/lib/services/auth.service";
+import toast from "react-hot-toast";
 
 export default function SignupPage() {
     const [name, setName] = useState<string>('');
@@ -14,6 +16,7 @@ export default function SignupPage() {
 
 
     const handleSubmit = async (e: React.FormEvent) => {
+        setLoading(true)
         e.preventDefault();
         setLoading(true);
         const payload = {
@@ -22,14 +25,25 @@ export default function SignupPage() {
             password
         }
         try {
-            // const response = await signup(payload)
-            // console.log(response)
+            const response = await signup(payload);
+            if(response && response.Success){
+                console.log(response)
+                toast.success("Sign Up Successfully");
+                restFormData()
+                
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+        } finally{
+            setLoading(false);
         }
     }
 
-
+    const restFormData = () =>{
+        setName('');
+        setEmail('');
+        setPassword('');
+    }
 
     return (
         <div className="min-h-[calc(100vh-64px)] flex bg-gray-50 dark:bg-gray-900">

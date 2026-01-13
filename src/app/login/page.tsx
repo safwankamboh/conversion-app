@@ -3,8 +3,38 @@
 import Link from "next/link";
 import { FileText, Facebook, Mail, Lock } from "lucide-react";
 import FormInput from "@/components/form-input";
+import { useState } from "react";
+import { login } from "@/lib/services/auth.service";
 
 export default function LoginPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [ isLoading, setIsLoading ] = useState(false);
+    
+    const handleSubmit = async() => {
+        setIsLoading(true);
+        const paylaod = {
+            email,
+            password
+        }
+        try{
+            const response = await login(paylaod)
+            if(response && response.Success){
+                console.log('res',response);
+                const accessToken = response.Data.AccessToken;
+                const userInfo = response.Data.User
+                localStorage.setItem('accessToken', accessToken)
+                localStorage.setItem('userInfo',JSON.stringify(userInfo))
+            }
+            else{
+                console.log('Something went wrong')
+            }
+        }catch(error){
+            console.log('error',error)
+        }finally{
+            setIsLoading(false);
+        }
+    }
     return (
         <div className="min-h-[calc(100vh-64px)] flex bg-gray-50 dark:bg-gray-900">
             {/* Left Side - Login Form */}
@@ -67,6 +97,8 @@ export default function LoginPage() {
                             <div>
                                 <FormInput
                                     type="email"
+                                    value={email}
+                                    onChange={(e)=>setEmail(e.target.value)}
                                     placeholder="Enter your email"
                                     leftIcon={Mail}
                                     size="md"
@@ -78,6 +110,8 @@ export default function LoginPage() {
                             <div>
                                 <FormInput
                                     type="password"
+                                    value={password}
+                                    onChange={(e)=>setPassword(e.target.value)}
                                     placeholder="Password"
                                     leftIcon={Lock}
                                     size="md"
@@ -99,6 +133,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             className="w-full flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg shadow-blue-500/30 transition-all transform hover:scale-[1.02]"
+                            onClick={handleSubmit}
                         >
                             Log in
                         </button>
